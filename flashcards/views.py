@@ -17,4 +17,10 @@ def testing(request):
     return render(request, 'base.html')
 
 
+def learn_flashcard(request):
+    flashcard = Flashcard.objects.all()[0]
+    return render(request, 'learn_flashcard.html',
+                  context={"flashcard": flashcard})
+
+
 # Create your views here.
