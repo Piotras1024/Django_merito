@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="text-center">
+        <h1>Your flashcards</h1>
+        <ul>
+
+                {% for flashcard in flashcards %}
+                    <li>
+                        <div class="card text-white bg-info bg-gradient">
+                            <div> <h1>{{ flashcard.name }}</h1></div>
+                            <a class="card-title m-1">{{ flashcard.question }}</a>
+                            <a class="card-title m-1">{{ flashcard.answer }}</a>
+                            <br><hr>
+                            <a class="card-title m-1">{{ flashcard }}</a>
+                        </div>
+                    </li>
+                {% endfor %}
+
+        </ul>
+        <hr>
+        <section>
+            <ul>
+                {% for flashcard in flashcards %}
+                        <div class="card text-white bg-info bg-gradient">
+                            <li><a class="card-title m-1">flashcard.name = {{ flashcard.name }}</a></li>
+                            <li><a class="card-title m-1">flashcard.question = {{ flashcard.question }}</a></li>
+                            <li><a class="card-title m-1">flashcard.answer = {{ flashcard.answer }}</a></li>
+                        </div>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+{% endblock %}
