@@ -6,5 +6,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('test', testing, name='test'),
     path('list', flashcards_list, name='flash'),
-    path('learn', learn_flashcard, name='learn')
+    path('learn/<slug:slug_name>', learn_flashcard, name='learn')
     ]

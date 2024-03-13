@@ -1,10 +1,67 @@
 {% extends "base.html" %}
-
 {% block content %}
+    <main class="centered-content">
+        <div class="d-flex justify-content-center p-3">
+            {% if previous_flashcard %}
+                <a href="{% url 'learn' slug_name=previous_flashcard.slug %}"
+                   class="btn btn-primary p-1 me-3">Back</a>
+            {% endif %}
+            {% if next_flashcard %}
+                <a href="{% url 'learn' slug_name=next_flashcard.slug %}"
+                   class="btn btn-primary p-1 ms-3">Next</a>
+            {% endif %}
+            <br>
+        </div>
+        <div class="badge rounded-pill bg-primary text-center p-3">
+            <h1>{{ flashcard.question }}</h1>
+        </div>
+        <section id="answerButton" class="text-center p-3">
+            <button id="showButton" class="btn btn-info btn-lg p-3">Answer</button>
+        </section>
+        <div id="hiddenDiv" class="badge rounded-pill bg-primary text-center p-3">
+            <h1>{{ flashcard.answer }}</h1>
+            <section class="card text-black bg-success shadow-small p-1">
+                {{ flashcard.answer }}
+            </section>
+        </div>
+        <script>
+    // Znajdź element <main>
+    const main = document.querySelector('main.centered-content');
+    // Znajdź wszystkie elementy <div> wewnątrz <main>
+    const divs = main.querySelectorAll('div');
+    let maxWidth = 0;
 
-    <main>
-        {{ flashcard }}
-        <br>
-        {{ flashcard.question }}
+    // Przeiteruj przez wszystkie <div>, znajdując najszerszy
+    divs.forEach(div => {
+        if (div.offsetWidth > maxWidth) {
+            maxWidth = div.offsetWidth;
+        }
+    });
+
+    // Ustaw szerokość <main> na szerokość najszerszego <div>
+    main.style.width = `${maxWidth + 50}px`;
+
+    // Skrypt do obsługi pokazywania/ukrywania odpowiedzi
+    document.addEventListener('DOMContentLoaded', (event) => {
+    const showButton = document.getElementById('showButton');
+    const hiddenDiv = document.getElementById('hiddenDiv');
+
+    // Początkowo ukryj hiddenDiv
+    hiddenDiv.style.display = 'none';
+
+    showButton.addEventListener('click', () => {
+        // Sprawdź aktualny stan i przełącz widoczność
+        if (hiddenDiv.style.display === 'none') {
+            hiddenDiv.style.display = 'block';
+            showButton.innerText = 'Hide'; // Ustaw tekst przycisku na "Hide"
+        } else {
+            hiddenDiv.style.display = 'none';
+            showButton.innerText = 'Answer'; // Ustaw tekst przycisku na "Answer"
+        }
+    });
+    });
+
+
+        </script>
     </main>
-{% endblock %}}
+{% endblock %}

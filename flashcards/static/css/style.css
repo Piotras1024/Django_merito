@@ -98,3 +98,21 @@ footer {
 .ui-menu-item:hover{
     background: #F8F8F8;
 }
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Możesz ustawić wysokość, jeśli potrzebujesz, np. na wysokość ekranu */
+}
+
+.card-link {
+    color: white; /* Ustawia kolor tekstu na biały */
+    text-decoration: none; /* Wyłącza podkreślenie */
+}
+.card-link:hover, .card-link:focus {
+    text-decoration: underline; /* Dodaje podkreślenie przy najechaniu lub fokusie */
+    font-weight: bold;
+    color: #FF0000; /* Zmienia kolor tekstu przy najechaniu lub fokusie */
+}
