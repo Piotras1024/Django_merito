@@ -48,4 +48,5 @@ def learn_flashcard(request, slug_name):
                   context=context)
 
 
+
 # Create your views here.
