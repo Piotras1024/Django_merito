@@ -5,6 +5,7 @@ from flashcards.views import home
 
 urlpatterns = [
     path('', include('flashcards.urls')),
+    path('', include('user_identification.urls')),
     path('', home),
     path('admin/', admin.site.urls)
 ]
