@@ -1,27 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Zarejestruj się</h2><br><hr>
-<form method="post">
+{% if user.is_authenticated %}
+    <h2>Witaj {{ user.username }} w świecie Fiszek. Jesteś już zarejestrowany. </h2>
+    <form action="{% url 'logout' %}" method="post">
     {% csrf_token %}
-    {{ form.username.label_tag }}
-    <small>Wymagane jest 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.</small><br>
-    {{ form.username }}
+    <button type="submit" class="btn btn-warning">Wyloguj</button>
+    </form>
+{% else %}
+    <h2>Zarejestruj się</h2><br><hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.username.label_tag }}
+        <small>Wymagane jest 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.</small><br>
+        {{ form.username }}
 
-   <small>&nbsp;</small>
-    {{ form.email.label_tag }}
-    <small> Upewnij się, że adres e-mail jest poprawny, aby uniknąć problemów z odbiorem ważnych komunikatów od strony.</small><br>
-    {{ form.email }}<br>
+       <small>&nbsp;</small>
+        {{ form.email.label_tag }}
+        <small> Upewnij się, że adres e-mail jest poprawny, aby uniknąć problemów z odbiorem ważnych komunikatów od strony.</small><br>
+        {{ form.email }}<br>
 
-    <small>&nbsp;</small>
-    {{ form.password1.label_tag }}
-    <small>Twoje hasło musi zawierać co najmniej 8 znaków. Twoje hasło nie może składać się tylko z cyfr. </small><br>
-    {{ form.password1 }}<br>
+        <small>&nbsp;</small>
+        {{ form.password1.label_tag }}
+        <small>Twoje hasło musi zawierać co najmniej 8 znaków. Twoje hasło nie może składać się tylko z cyfr. </small><br>
+        {{ form.password1 }}<br>
 
-    <small>&nbsp;</small>
-    {{ form.password2.label_tag }}
-    <small>Wprowadź to samo hasło ponownie, dla weryfikacji.</small><br>
-    {{ form.password2 }}<br><br>
+        <small>&nbsp;</small>
+        {{ form.password2.label_tag }}
+        <small>Wprowadź to samo hasło ponownie, dla weryfikacji.</small><br>
+        {{ form.password2 }}<br><br>
 
-    <button type="submit">Zarejestruj się</button>
-</form>
+        <button type="submit">Zarejestruj się</button>
+    </form>
+{% endif %}
 {% endblock %}

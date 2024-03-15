@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
+from django.contrib import messages
 from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 
 
 def signup_view(request):
+    # Logika rejestracji dla niezalogowanych użytkowników
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -17,6 +19,9 @@ def signup_view(request):
 
 
 def login_view(request):
+    # Jeśli 'next' w URL, dodaj komunikat
+    if 'next' in request.GET:
+        messages.info(request, 'Zaloguj się, zanim stworzysz nowy Deck')
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():

@@ -1,7 +1,8 @@
-import django.utils.text
-from django.shortcuts import render, get_object_or_404
-from .models import Flashcard
+from django.shortcuts import render, get_object_or_404, redirect
 from flashcards.models import Flashcard
+from django.contrib.auth.decorators import login_required
+from .forms import DeckForm, FlashcardForm
+from .models import Deck, Flashcard
 from django.utils.text import slugify
 
 
@@ -48,5 +49,34 @@ def learn_flashcard(request, slug_name):
                   context=context)
 
 
+@login_required
+def create_deck(request):
+    decks = Deck.objects.filter(owner=request.user)
+    if request.method == 'POST':
+        form = DeckForm(request.POST)
+        if form.is_valid():
+            deck = form.save(commit=False)
+            deck.owner = request.user
+            deck.save()
+            return redirect('test')  # zmień na właściwą nazwę widoku
+    else:
+        form = DeckForm()
+    return render(request, 'create_deck.html', {'form': form, "decks": decks})
+
+
+@login_required
+def deck_flashcards(request, slug):
+    deck = get_object_or_404(Deck, slug=slug, owner=request.user)
+    if request.method == 'POST':
+        form = FlashcardForm(request.POST)
+        if form.is_valid():
+            flashcard = form.save(commit=False)
+            flashcard.deck = deck
+            flashcard.save()
+            return redirect('deck_flashcards', slug=deck.slug)
+    else:
+        form = FlashcardForm()
+    flashcards = deck.flashcards.all()
+    return render(request, 'deck_flashcards.html', {'deck': deck, 'flashcards': flashcards, 'form': form})
 
 # Create your views here.

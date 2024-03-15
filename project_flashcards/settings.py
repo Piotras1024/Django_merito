@@ -56,7 +56,7 @@ ROOT_URLCONF = 'project_flashcards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +124,7 @@ STATICFILES_DIRS = [
     # Add other directories here if you have them
 ]
 
+LOGIN_URL = '/user/login'
 
 
 # Default primary key field type

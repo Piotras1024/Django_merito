@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Stwórz nowy deck {{ user.username }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Utwórz deck</button>
+</form>
+
+<h1>Your DECKS</h1>
+    <ul>
+        {% for deck in decks %}
+            <li>
+                <div class="card text-white bg-info bg-gradient p-3">
+                    <h1>
+                        <a href="{% url 'deck_flashcards' deck.slug %}" class="card-link">{{ deck.name }}</a>
+                    </h1>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
