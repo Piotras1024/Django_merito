@@ -12,5 +12,5 @@ class DeckForm(forms.ModelForm):
 class FlashcardForm(forms.ModelForm):
     class Meta:
         model = Flashcard
-        fields = ['name', 'question', 'answer']
+        fields = ['question', 'answer']
         # `deck` jest potrzebny, aby wskazać, do którego decku fiszka należy

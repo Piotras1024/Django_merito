@@ -18,7 +18,6 @@ class Deck(models.Model):
 
 
 class Flashcard(models.Model):
-    name = models.CharField(max_length=100)
     question = models.CharField(max_length=500)
     answer = models.CharField(max_length=500)
     slug = models.SlugField(max_length=200)
@@ -26,11 +25,11 @@ class Flashcard(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:  # Jeśli slug nie jest już ustawiony
-            self.slug = slugify(self.name)  # Generuj slug z name
+            self.slug = slugify(self.question)  # Generuj slug z name
         super().save(*args, **kwargs)  # Wywołaj oryginalną metodę save
 
     def __str__(self):
-        return self.name
+        return self.question
 
 # Tutaj definiujemy tylko typy
 '''
