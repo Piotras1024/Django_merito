@@ -45,7 +45,7 @@
                        data-bs-toggle="dropdown"
                        aria-expanded="false">My Collection</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'test' %}">
+                        <a class="dropdown-item" href="{% url 'signup' %}">
                             <li>Decks</li>
                         </a>
                         <a class="dropdown-item" href="{% url 'flash' %}">
@@ -57,10 +57,12 @@
         </div>
         <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
+                <a href="{% url 'signup' %}">
                 <li class="btn btn-alert navbar-btn bg-primary bg-gradient text-white m-3"
-                    type="button">Register</li>
+                    type="button">Register</li></a>
+                <a href="{% url 'login' %}">
                 <li class="btn btn-alert navbar-btn bg-primary bg-gradient text-white m-3"
-                    type="button">Login</li>
+                    type="button">Login</li></a>
             </ul>
         </div>
     </header>

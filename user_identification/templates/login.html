@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Logowanie</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zaloguj się</button>
+</form>
+
+{% if user.is_authenticated %}
+    <h2>Witaj {{ user.username }} w świecie fiszek</h2>
+    <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning">Wyloguj</button>
+</form>
+{% else %}
+    <h2>Please log in to explore world of flashcards</h2>
+{% endif %}
+
+
+{% endblock %}

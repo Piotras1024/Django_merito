@@ -45,10 +45,10 @@
                        data-bs-toggle="dropdown"
                        aria-expanded="false">My Collection</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'test' %}">
+                        <a class="dropdown-item" href="{% url 'user/:signup_view' %}">
                             <li>Decks</li>
                         </a>
-                        <a class="dropdown-item" href="{% url 'flash' %}">
+                        <a class="dropdown-item" href="{% url 'flashcards/:flash' %}">
                             <li>Flashcards</li>
                         </a>
                     </ul>
